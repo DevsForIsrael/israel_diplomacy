@@ -45,7 +45,7 @@ function App() {
           Participate in debates and help spread the truth
         </Typography>
       </Stack>
-      <Stack justifyContent='center' alignItems='center' width='100%'>
+      <Stack justifyContent='center' alignItems='center' width='100%' mb={3}>
         <ButtonGroup variant='outlined' aria-label='outlined button group'>
           <Button onClick={() => setChosenNetwork("reddit")}>
             <Stack justifyContent='center' alignItems='center'>
