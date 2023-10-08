@@ -20,12 +20,17 @@ function App() {
     twitter.src = "//platform.twitter.com/widgets.js";
     twitter.async = true;
     document.body.appendChild(twitter);
+    const tiktok = document.createElement("script");
+    tiktok.src = "//www.tiktok.com/embed.js";
+    tiktok.async = true;
+    document.body.appendChild(tiktok);
   }, []);
 
   return (
     <div className='App'>
-      <Stack p={5}>
+      <Stack p={5} pt={2}>
         <Stack mb={1}>
+          <span style={{ fontSize: "2em" }}>🇮🇱</span>
           <Typography variant='h1' fontSize={35} fontWeight={700}>
             Help with Israeli Diplomacy across the Web
           </Typography>
@@ -45,15 +50,15 @@ function App() {
           <Button onClick={() => setChosenNetwork("twitter")}>
             <Stack justifyContent='center' alignItems='center'>
               <TwitterIcon />
-              Twitter (X)
+              Twitter
             </Stack>
           </Button>
-          <Button onClick={() => setChosenNetwork("facebook")}>
+          {/* <Button onClick={() => setChosenNetwork("facebook")}>
             <Stack justifyContent='center' alignItems='center'>
               <FacebookIcon />
               Facebook
             </Stack>
-          </Button>
+          </Button> */}
           <Button onClick={() => setChosenNetwork("tiktok")}>
             <Stack justifyContent='center' alignItems='center'>
               <TikTokIcon />
@@ -63,7 +68,7 @@ function App() {
         </ButtonGroup>
       </Stack>
       <Stack
-        p={5}
+        p={2}
         gap={5}
         style={{
           opacity: chosenNetwork === "reddit" ? 1 : 0,
@@ -82,14 +87,14 @@ function App() {
                   style={{ height: 500 }}
                   data-embed-height='240'
                 >
-                  <a href={post}>{post}</a>
+                  <a href={post}>Loading</a>
                 </blockquote>
               </Stack>
             );
           })}
       </Stack>
       <Stack
-        p={5}
+        p={1}
         gap={5}
         justifyContent='center'
         alignItems='center'
@@ -107,15 +112,58 @@ function App() {
           .map((post) => {
             return (
               <Stack>
-                <blockquote className='twitter-tweet'>
+                <blockquote
+                  className='twitter-tweet'
+                  style={{ width: "350px" }}
+                >
                   <a href={post.toLowerCase().replace("x.", "twitter.")}>
-                    {post}
+                    Loading
                   </a>
                 </blockquote>
               </Stack>
             );
           })}
       </Stack>
+      <Stack
+        p={1}
+        gap={5}
+        justifyContent='center'
+        alignItems='center'
+        style={{
+          opacity: chosenNetwork === "tiktok" ? 1 : 0,
+        }}
+        position={chosenNetwork === "tiktok" ? "initial" : "absolute"}
+        top={chosenNetwork === "tiktok" ? 0 : -1000}
+        zIndex={-1000000}
+      >
+        {posts
+          .filter((post: string) => post.includes("tiktok"))
+          .map((post) => {
+            return (
+              <Stack>
+                <blockquote
+                  className='tiktok-embed'
+                  cite='https://www.tiktok.com/@orel_nissan/video/7287238989013175560'
+                  data-video-id='7287238989013175560'
+                >
+                  <section>Loading</section>
+                </blockquote>
+                <script async src='https://www.tiktok.com/embed.js'></script>
+              </Stack>
+            );
+          })}
+      </Stack>
+      <footer>
+        <Stack pt={2} pb={4}>
+          <Typography variant='body2'>
+            Made with love
+            <br />
+            Use this <a href='mailto:nirtz89@gmail.com'>Google Form</a> for
+            adding posts
+          </Typography>
+          <span style={{ fontSize: "2em" }}>🇮🇱</span>
+        </Stack>
+      </footer>
     </div>
   );
 }
