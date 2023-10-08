@@ -9,7 +9,7 @@ import TikTokIcon from "./icons/TiktokIcon";
 
 function App() {
   const [chosenNetwork, setChosenNetwork] =
-    useState<"reddit" | "twitter" | "facebook" | "tiktok">("twitter");
+    useState<"reddit" | "twitter" | "facebook" | "tiktok">("reddit");
 
   useEffect(() => {
     const reddit = document.createElement("script");
