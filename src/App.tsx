@@ -1,14 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { Stack, Typography } from "@mui/material";
+import { Button, ButtonGroup, Stack, Typography } from "@mui/material";
+import RedditIcon from "@mui/icons-material/Reddit";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import posts from "./posts.json";
+import TikTokIcon from "./icons/TiktokIcon";
 
 function App() {
+  const [chosenNetwork, setChosenNetwork] =
+    useState<"reddit" | "twitter" | "facebook" | "tiktok">("twitter");
+
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//embed.redditmedia.com/widgets/platform.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const reddit = document.createElement("script");
+    reddit.src = "//embed.redditmedia.com/widgets/platform.js";
+    reddit.async = true;
+    document.body.appendChild(reddit);
+    const twitter = document.createElement("script");
+    twitter.src = "//platform.twitter.com/widgets.js";
+    twitter.async = true;
+    document.body.appendChild(twitter);
   }, []);
 
   return (
@@ -23,20 +34,87 @@ function App() {
           Participate in debates and help spread the truth
         </Typography>
       </Stack>
-      <Stack p={5} gap={5} width='100%'>
-        {posts.map((post) => {
-          return (
-            <Stack>
-              <blockquote
-                className='reddit-embed-bq'
-                style={{ height: 500 }}
-                data-embed-height='240'
-              >
-                <a href={post}>{post}</a>
-              </blockquote>
+      <Stack justifyContent='center' alignItems='center' width='100%'>
+        <ButtonGroup variant='outlined' aria-label='outlined button group'>
+          <Button onClick={() => setChosenNetwork("reddit")}>
+            <Stack justifyContent='center' alignItems='center'>
+              <RedditIcon />
+              Reddit
             </Stack>
-          );
-        })}
+          </Button>
+          <Button onClick={() => setChosenNetwork("twitter")}>
+            <Stack justifyContent='center' alignItems='center'>
+              <TwitterIcon />
+              Twitter (X)
+            </Stack>
+          </Button>
+          <Button onClick={() => setChosenNetwork("facebook")}>
+            <Stack justifyContent='center' alignItems='center'>
+              <FacebookIcon />
+              Facebook
+            </Stack>
+          </Button>
+          <Button onClick={() => setChosenNetwork("tiktok")}>
+            <Stack justifyContent='center' alignItems='center'>
+              <TikTokIcon />
+              Tiktok
+            </Stack>
+          </Button>
+        </ButtonGroup>
+      </Stack>
+      <Stack
+        p={5}
+        gap={5}
+        style={{
+          opacity: chosenNetwork === "reddit" ? 1 : 0,
+        }}
+        position={chosenNetwork === "reddit" ? "initial" : "absolute"}
+        top={chosenNetwork === "reddit" ? 0 : -1000}
+        zIndex={-1000000}
+      >
+        {posts
+          .filter((post: string) => post.includes("reddit"))
+          .map((post) => {
+            return (
+              <Stack>
+                <blockquote
+                  className='reddit-embed-bq'
+                  style={{ height: 500 }}
+                  data-embed-height='240'
+                >
+                  <a href={post}>{post}</a>
+                </blockquote>
+              </Stack>
+            );
+          })}
+      </Stack>
+      <Stack
+        p={5}
+        gap={5}
+        justifyContent='center'
+        alignItems='center'
+        style={{
+          opacity: chosenNetwork === "twitter" ? 1 : 0,
+        }}
+        position={chosenNetwork === "twitter" ? "initial" : "absolute"}
+        top={chosenNetwork === "twitter" ? 0 : -1000}
+        zIndex={-1000000}
+      >
+        {posts
+          .filter(
+            (post: string) => post.includes("twitter") || post.includes("x")
+          )
+          .map((post) => {
+            return (
+              <Stack>
+                <blockquote className='twitter-tweet'>
+                  <a href={post.toLowerCase().replace("x.", "twitter.")}>
+                    {post}
+                  </a>
+                </blockquote>
+              </Stack>
+            );
+          })}
       </Stack>
     </div>
   );
