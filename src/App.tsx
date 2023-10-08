@@ -84,6 +84,7 @@ function App() {
         zIndex={-1000000}
       >
         {posts
+          .reverse()
           .filter((post: string) => post.includes("reddit"))
           .map((post) => {
             return (
@@ -112,6 +113,7 @@ function App() {
         zIndex={-1000000}
       >
         {posts
+          .reverse()
           .filter(
             (post: string) => post.includes("twitter") || post.includes("x")
           )
@@ -143,6 +145,7 @@ function App() {
         zIndex={-1000000}
       >
         {posts
+          .reverse()
           .filter((post: string) => post.includes("tiktok"))
           .map((post) => {
             return (
