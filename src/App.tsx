@@ -99,7 +99,9 @@ function App() {
         justifyContent='center'
         alignItems='center'
         style={{
+          display:"grid",
           opacity: chosenNetwork === "twitter" ? 1 : 0,
+         
         }}
         position={chosenNetwork === "twitter" ? "initial" : "absolute"}
         top={chosenNetwork === "twitter" ? 0 : -1000}
