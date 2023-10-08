@@ -158,7 +158,8 @@ function App() {
           <Typography variant='body2'>
             Made with love
             <br />
-            Use this <a href='mailto:nirtz89@gmail.com'>Google Form</a> for
+            Use this{" "}
+            <a href='https://forms.gle/qmt8tQ6mKy8cWLMS7'>Google Form</a> for
             adding posts
           </Typography>
           <span style={{ fontSize: "2em" }}>🇮🇱</span>
