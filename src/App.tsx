@@ -26,6 +26,12 @@ function App() {
     document.body.appendChild(tiktok);
   }, []);
 
+  const getTiktokVideoId = (url: string) => {
+    const regex = /\/video\/(\d+)/;
+    const match = url.match(regex);
+    return match?.[1] || null;
+  };
+
   return (
     <div className='App'>
       <Stack p={5} pt={2}>
@@ -143,8 +149,8 @@ function App() {
               <Stack>
                 <blockquote
                   className='tiktok-embed'
-                  cite='https://www.tiktok.com/@orel_nissan/video/7287238989013175560'
-                  data-video-id='7287238989013175560'
+                  cite={post}
+                  data-video-id={getTiktokVideoId(post)}
                 >
                   <section>Loading</section>
                 </blockquote>
