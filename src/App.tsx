@@ -58,11 +58,6 @@ function App() {
                 reportedly kidnapped and taken to the Gaza Strip.
               </li>
               <li style={{marginBottom: "1.5em"}}>
-                Israel formally declared a state of war in response to the Hamas
-                attack. Israeli jets carried out intense airstrikes on Gaza
-                targets.
-              </li>
-              <li style={{marginBottom: "1.5em"}}>
                 Battles were ongoing in several communities near the Gaza border
                 that had been overrun by Hamas gunmen. Rocket fire from Gaza
                 continued to target Israeli communities.
@@ -71,11 +66,6 @@ function App() {
                 The assault by Hamas gunmen had taken place in as many as 22
                 locations in southern Israel, resulting in the deaths of
                 civilians and soldiers.
-              </li>
-              <li style={{marginBottom: "1.5em"}}>
-                The situation had shocked and outraged the nation, leading to
-                demands for answers about intelligence failures and policy
-                issues.
               </li>
               <li style={{marginBottom: "1.5em"}}>
                 Reports suggested that over 700 people were killed in the
