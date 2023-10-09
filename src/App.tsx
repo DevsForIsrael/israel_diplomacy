@@ -18,11 +18,16 @@ import TikTokIcon from "./icons/TiktokIcon";
 import il from "./assets/il.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareButtons from "./ShareButtons";
+import { shuffle } from "./utils";
+import InstagramIcon from "@mui/icons-material/Instagram";
+
+const shuffledPosts = shuffle(posts);
 
 function App() {
-  const [chosenNetwork, setChosenNetwork] = useState<
-    "reddit" | "twitter" | "facebook" | "tiktok"
-  >("reddit");
+  const [chosenNetwork, setChosenNetwork] =
+    useState<"reddit" | "twitter" | "facebook" | "tiktok" | "instagram">(
+      "reddit"
+    );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -47,7 +52,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className='App'>
       <Drawer
         anchor={"top"}
         open={isDrawerOpen}
@@ -55,18 +60,18 @@ function App() {
       >
         <Stack
           onClick={() => setIsDrawerOpen(false)}
-          position="absolute"
+          position='absolute'
           right={0}
           p={2}
         >
           <CloseIcon />
         </Stack>
-        <Stack p={4} alignItems="center" gap={2} pb={6}>
-          <Typography variant="h5">
+        <Stack p={4} alignItems='center' gap={2} pb={6}>
+          <Typography variant='h5'>
             Tips for explaining Israels situation in the world
           </Typography>
           <Stack>
-            <Typography variant="subtitle1">Use these facts:</Typography>
+            <Typography variant='subtitle1'>Use these facts:</Typography>
             <ul style={{ padding: "1em" }}>
               <li style={{ marginBottom: "1.5em" }}>
                 The death toll from a major Hamas attack had risen above 700,
@@ -127,12 +132,12 @@ function App() {
             <Stack
               mt={4}
               onClick={() => setIsDrawerOpen(false)}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
             >
               <Button
                 onClick={() => setIsDrawerOpen(false)}
-                variant="outlined"
+                variant='outlined'
                 sx={{
                   width: "100%",
                   maxWidth: 300,
@@ -147,51 +152,50 @@ function App() {
       <Stack
         p={1}
         style={{ background: "whitesmoke" }}
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
+        direction='row'
+        alignItems='center'
+        justifyContent='center'
         onClick={() => setIsDrawerOpen(true)}
       >
-        <Typography variant="body1">
+        <Typography variant='body1'>
           Tips for explaining Israels situation in the world
         </Typography>
         <ArrowDropDownIcon />
       </Stack>
-      <Stack p={5} pt={3} justifyContent="center" alignItems="center">
-        <Stack mb={1} justifyContent="center" alignItems="center" gap={1}>
-          <img alt="israel" src={il} style={{ width: 36, height: 36 }} />
-          <Typography variant="h1" fontSize={35} fontWeight={700}>
+      <Stack p={5} pt={3} justifyContent='center' alignItems='center'>
+        <Stack mb={1} justifyContent='center' alignItems='center' gap={1}>
+          <img alt='israel' src={il} style={{ width: 36, height: 36 }} />
+          <Typography variant='h1' fontSize={35} fontWeight={700}>
             Help with Israeli Diplomacy across the Web
           </Typography>
         </Stack>
-        <Typography variant="h2" fontSize={25}>
+        <Typography variant='h2' fontSize={25}>
           Participate in debates and help spread the truth
         </Typography>
       </Stack>
-      <Stack justifyContent="center" alignItems="center" width="100%" mb={3}>
-        <ButtonGroup variant="outlined" aria-label="outlined button group">
+      <Stack justifyContent='center' alignItems='center' width='100%' mb={3}>
+        <Typography variant='subtitle1' fontSize={16} pb={0.5}>
+          Preferred Network
+        </Typography>
+        <ButtonGroup variant='outlined' aria-label='outlined button group'>
           <Button onClick={() => setChosenNetwork("reddit")}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack justifyContent='center' alignItems='center'>
               <RedditIcon />
-              Reddit
             </Stack>
           </Button>
           <Button onClick={() => setChosenNetwork("twitter")}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack justifyContent='center' alignItems='center'>
               <TwitterIcon />
-              Twitter
             </Stack>
           </Button>
-          {/* <Button onClick={() => setChosenNetwork("facebook")}>
+          <Button onClick={() => setChosenNetwork("instagram")}>
             <Stack justifyContent='center' alignItems='center'>
-              <FacebookIcon />
-              Facebook
+              <InstagramIcon />
             </Stack>
-          </Button> */}
+          </Button>
           <Button onClick={() => setChosenNetwork("tiktok")}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack justifyContent='center' alignItems='center'>
               <TikTokIcon />
-              Tiktok
             </Stack>
           </Button>
         </ButtonGroup>
@@ -203,20 +207,21 @@ function App() {
           opacity: chosenNetwork === "reddit" ? 1 : 0,
           backgroundColor: "whitesmoke",
         }}
+        height={chosenNetwork === "reddit" ? "initial" : 0}
         position={chosenNetwork === "reddit" ? "initial" : "absolute"}
         top={chosenNetwork === "reddit" ? 0 : -1000}
         zIndex={-1000000}
       >
-        {posts
+        {shuffledPosts
           .reverse()
           .filter((post: string) => post.includes("reddit"))
           .map((post) => {
             return (
               <Stack>
                 <blockquote
-                  className="reddit-embed-bq"
+                  className='reddit-embed-bq'
                   style={{ height: 500 }}
-                  data-embed-height="240"
+                  data-embed-height='240'
                 >
                   <a href={post}>Loading</a>
                 </blockquote>
@@ -228,29 +233,30 @@ function App() {
       <Stack
         p={1}
         gap={5}
-        justifyContent="center"
-        alignItems="center"
+        justifyContent='center'
+        alignItems='center'
         style={{
           opacity: chosenNetwork === "twitter" ? 1 : 0,
           backgroundColor: "whitesmoke",
         }}
+        height={chosenNetwork === "twitter" ? "initial" : 0}
         position={chosenNetwork === "twitter" ? "initial" : "absolute"}
         top={chosenNetwork === "twitter" ? 0 : -1000}
         zIndex={-1000000}
       >
-        {posts
+        {shuffledPosts
           .reverse()
           .filter(
-            (post: string) => post.includes("twitter") || post.includes("x")
+            (post: string) => post.includes("twitter") || post.includes("x.com")
           )
           .map((post) => {
             return (
               <Stack>
                 <blockquote
-                  className="twitter-tweet"
+                  className='twitter-tweet'
                   style={{ width: "350px" }}
                 >
-                  <a href={post.toLowerCase().replace("x.", "twitter.")}>
+                  <a href={post.toLowerCase().replace("x.com", "twitter.com")}>
                     Loading
                   </a>
                 </blockquote>
@@ -262,24 +268,25 @@ function App() {
       <Stack
         p={1}
         gap={5}
-        justifyContent="center"
-        alignItems="center"
+        justifyContent='center'
+        alignItems='center'
         style={{
           opacity: chosenNetwork === "tiktok" ? 1 : 0,
           backgroundColor: "whitesmoke",
         }}
+        height={chosenNetwork === "tiktok" ? "initial" : 0}
         position={chosenNetwork === "tiktok" ? "initial" : "absolute"}
         top={chosenNetwork === "tiktok" ? 0 : -1000}
         zIndex={-1000000}
       >
-        {posts
+        {shuffledPosts
           .reverse()
           .filter((post: string) => post.includes("tiktok"))
           .map((post) => {
             return (
               <Stack>
                 <blockquote
-                  className="tiktok-embed"
+                  className='tiktok-embed'
                   cite={post}
                   data-video-id={getTiktokVideoId(post)}
                 >
@@ -287,7 +294,7 @@ function App() {
                 </blockquote>
 
                 <ShareButtons url={post} />
-                <script async src="https://www.tiktok.com/embed.js"></script>
+                <script async src='https://www.tiktok.com/embed.js'></script>
               </Stack>
             );
           })}
@@ -296,18 +303,18 @@ function App() {
         <Stack
           pt={2}
           pb={4}
-          justifyContent="center"
-          alignItems="center"
+          justifyContent='center'
+          alignItems='center'
           gap={2}
         >
-          <Typography variant="body2">
+          <Typography variant='body2'>
             Made with love
             <br />
             Use this{" "}
-            <a href="https://forms.gle/qmt8tQ6mKy8cWLMS7">Google Form</a> for
+            <a href='https://forms.gle/qmt8tQ6mKy8cWLMS7'>Google Form</a> for
             adding posts
           </Typography>
-          <img alt="israel" src={il} style={{ width: 36, height: 36 }} />
+          <img alt='israel' src={il} style={{ width: 36, height: 36 }} />
         </Stack>
       </footer>
     </div>
