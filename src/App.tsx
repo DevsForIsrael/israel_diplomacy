@@ -108,8 +108,12 @@ function App() {
               information available at the time of the report, and developments
               may have occurred since then.
             </p>
-            <Stack mt={4}>
-              <Button variant="outlined" onClick={() => setIsDrawerOpen(false)}>Close</Button>
+            <Stack mt={4} onClick={() => setIsDrawerOpen(false)} justifyContent="center" alignItems="center">
+              <Button onClick={() => setIsDrawerOpen(false)} variant="outlined"
+              sx={{
+                width: "100%",
+                maxWidth: 300
+              }}>Close</Button>
             </Stack>
           </Stack>
         </Stack>
