@@ -127,7 +127,7 @@ function App() {
         </Typography>
         <ArrowDropDownIcon />
       </Stack>
-      <Stack p={5} pt={5} justifyContent="center" alignItems="center">
+      <Stack p={5} pt={3} justifyContent="center" alignItems="center">
         <Stack mb={1} justifyContent="center" alignItems="center" gap={1}>
           <img alt="israel" src={il} style={{ width: 36, height: 36 }} />
           <Typography variant="h1" fontSize={35} fontWeight={700}>
