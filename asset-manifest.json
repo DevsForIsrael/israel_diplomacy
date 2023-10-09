@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/israel_diplomacy/static/css/main.32b0d29c.css",
-    "main.js": "/israel_diplomacy/static/js/main.db5dc31e.js",
+    "main.js": "/israel_diplomacy/static/js/main.6a68e606.js",
     "static/js/787.b083e74a.chunk.js": "/israel_diplomacy/static/js/787.b083e74a.chunk.js",
     "static/media/il.svg": "/israel_diplomacy/static/media/il.734c9ce3eb0b4599d0fbddf4ee533b7d.svg",
     "index.html": "/israel_diplomacy/index.html",
     "main.32b0d29c.css.map": "/israel_diplomacy/static/css/main.32b0d29c.css.map",
-    "main.db5dc31e.js.map": "/israel_diplomacy/static/js/main.db5dc31e.js.map",
+    "main.6a68e606.js.map": "/israel_diplomacy/static/js/main.6a68e606.js.map",
     "787.b083e74a.chunk.js.map": "/israel_diplomacy/static/js/787.b083e74a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.32b0d29c.css",
-    "static/js/main.db5dc31e.js"
+    "static/js/main.6a68e606.js"
   ]
 }
