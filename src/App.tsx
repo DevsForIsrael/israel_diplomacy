@@ -9,26 +9,24 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import RedditIcon from "@mui/icons-material/Reddit";
-// import FacebookIcon from "@mui/icons-material/Facebook";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import posts from "./posts.json";
-import TikTokIcon from "./icons/TiktokIcon";
-import il from "./assets/il.svg";
-import CloseIcon from "@mui/icons-material/Close";
-import ShareButtons from "./ShareButtons";
 import { shuffle } from "./utils";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import TiktokBlock from "./components/TiktokBlock";
+import RedditBlock from "./components/RedditBlock";
+import TwitterBlock from "./components/TwitterBlock";
+import InstagramBlock from "./components/InstagramBlock";
+import OverviewDrawer from "./components/OverviewDrawer";
+import SiteHeader from "./components/SiteHeader";
+import ButtonsNetworkChoice from "./components/ButtonsNetworkChoice";
+import PageFooter from "./components/PageFooter";
 
 const shuffledPosts = shuffle(posts);
 
 function App() {
-  const [chosenNetwork, setChosenNetwork] =
-    useState<"reddit" | "twitter" | "facebook" | "tiktok" | "instagram">(
-      "reddit"
-    );
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [chosenNetwork, setChosenNetwork] = useState<
+    "reddit" | "twitter" | "facebook" | "tiktok" | "instagram"
+  >("reddit");
 
   useEffect(() => {
     const reddit = document.createElement("script");
@@ -49,197 +47,37 @@ function App() {
     document.body.appendChild(ig);
   }, []);
 
-  const getTiktokVideoId = (url: string) => {
-    const regex = /\/video\/(\d+)/;
-    const match = url.match(regex);
-    return match?.[1] || null;
-  };
-
   return (
-    <div className='App'>
-      <Drawer
-        anchor={"top"}
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      >
-        <Stack
-          onClick={() => setIsDrawerOpen(false)}
-          position='absolute'
-          right={0}
-          p={2}
-        >
-          <CloseIcon />
-        </Stack>
-        <Stack p={4} alignItems='center' gap={2} pb={6}>
-          <Typography variant='h5' fontFamily="'Century Gothic', Arial, sans-serif">
-            Tips for explaining Israels situation in the world
-          </Typography>
-          <Stack>
-            <Typography variant='subtitle1'  fontFamily="'Century Gothic', Arial, sans-serif">Use these facts:</Typography>
-            <ul style={{ padding: "1em" }}>
-              <li style={{ marginBottom: "1.5em" }}>
-                The death toll from a major Hamas attack had risen above 700,
-                with the number expected to increase. Over 100 people were
-                reportedly kidnapped and taken to the Gaza Strip.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                Battles were ongoing in several communities near the Gaza border
-                that had been overrun by Hamas gunmen. Rocket fire from Gaza
-                continued to target Israeli communities.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                The assault by Hamas gunmen had taken place in as many as 22
-                locations in southern Israel, resulting in the deaths of
-                civilians and soldiers.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                Reports suggested that over 700 people were killed in the
-                assault, making it the bloodiest day in Israel's history.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                The Health Ministry reported over 2,200 wounded, with some in
-                critical condition.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                Hamas gunmen had taken civilians and soldiers captive into Gaza,
-                and there were reports of abuse and parading of dead Israelis in
-                the streets.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                Israel was working to locate and rescue the captives, with a
-                special situation room established for this purpose.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                Many families were desperately seeking information about missing
-                loved ones and criticized the government for not providing
-                enough assistance.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                There were concerns about a potential second front opening in
-                the north, as Hezbollah shelled Israeli positions on the
-                northern border.
-              </li>
-              <li style={{ marginBottom: "1.5em" }}>
-                The international community condemned the Hamas assault and the
-                abduction of civilians, and Israel received support from Western
-                governments.
-              </li>
-            </ul>
-            <Stack
-              mt={4}
-              onClick={() => setIsDrawerOpen(false)}
-              justifyContent='center'
-              alignItems='center'
-            >
-              <Button
-                onClick={() => setIsDrawerOpen(false)}
-                variant='outlined'
-                sx={{
-                  width: "100%",
-                  maxWidth: 300,
-                }}
-              >
-                Close
-              </Button>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Drawer>
-      <Stack
-        p={1}
-        style={{ background: "whitesmoke" }}
-        direction='row'
-        alignItems='center'
-        justifyContent='center'
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <Typography variant='body1'  fontFamily="'Century Gothic', Arial, sans-serif">
-          Tips for explaining Israels situation in the world
-        </Typography>
-        <ArrowDropDownIcon />
-      </Stack>
-      <Stack p={5} pt={3} justifyContent='center' alignItems='center'>
-        <Stack mb={1} justifyContent='center' alignItems='center' gap={1}>
-          <img alt='israel' src={il} style={{ width: 36, height: 36 }} />
-          <Typography variant='h1' fontFamily="'Century Gothic', Arial, sans-serif"  fontSize={34} fontWeight={600}>
-            Help with Israeli Diplomacy across the Web
-          </Typography>
-        </Stack>
-        <Typography variant='h2' fontFamily="'Century Gothic', Arial, sans-serif" fontSize={25}>
-          Participate in debates and help spread the truth
-        </Typography>
-      </Stack>
-      <Stack justifyContent='center' alignItems='center' width='100%' mb={3}>
-        <Typography variant='subtitle1' fontFamily="'Century Gothic', Arial, sans-serif"  fontSize={16} pb={0.5}>
-          Preferred Network
-        </Typography>
-        <ButtonGroup variant='outlined' aria-label='outlined button group'>
-          <Button onClick={() => setChosenNetwork("reddit")}>
-            <Stack justifyContent='center' alignItems='center'>
-              <RedditIcon />
-            </Stack>
-          </Button>
-          <Button onClick={() => setChosenNetwork("twitter")}>
-            <Stack justifyContent='center' alignItems='center'>
-              <TwitterIcon />
-            </Stack>
-          </Button>
-          <Button onClick={() => setChosenNetwork("instagram")}>
-            <Stack justifyContent='center' alignItems='center'>
-              <InstagramIcon />
-            </Stack>
-          </Button>
-          <Button onClick={() => setChosenNetwork("tiktok")}>
-            <Stack justifyContent='center' alignItems='center'>
-              <TikTokIcon />
-            </Stack>
-          </Button>
-        </ButtonGroup>
-      </Stack>
+    <div className="App">
+      <OverviewDrawer />
+      <SiteHeader />
+      <ButtonsNetworkChoice setChosenNetwork={setChosenNetwork} />
       <Stack
         p={2}
         gap={5}
+        justifyContent="center"
+        alignItems="center"
         style={{
-          opacity: chosenNetwork === "reddit" ? 1 : 0,
+          display: chosenNetwork === "reddit" ? "" : "none",
           backgroundColor: "whitesmoke",
         }}
-        height={chosenNetwork === "reddit" ? "initial" : 0}
-        position={chosenNetwork === "reddit" ? "initial" : "absolute"}
-        top={chosenNetwork === "reddit" ? 0 : -1000}
-        zIndex={-1000000}
       >
         {shuffledPosts
           .reverse()
           .filter((post: string) => post.includes("reddit"))
           .map((post) => {
-            return (
-              <Stack>
-                <blockquote
-                  className='reddit-embed-bq'
-                  style={{ height: 500 }}
-                  data-embed-height='240'
-                >
-                  <a href={post}>Loading</a>
-                </blockquote>
-                <ShareButtons url={post} />
-              </Stack>
-            );
+            return <RedditBlock url={post} />;
           })}
       </Stack>
       <Stack
         p={1}
         gap={5}
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         style={{
-          display:"grid",
-          opacity: chosenNetwork === "twitter" ? 1 : 0,
+          display: chosenNetwork === "twitter" ? "grid" : "none",
           backgroundColor: "whitesmoke",
         }}
-        height={chosenNetwork === "twitter" ? "initial" : 0}
-        position={chosenNetwork === "twitter" ? "initial" : "absolute"}
-        top={chosenNetwork === "twitter" ? 0 : -1000}
-        zIndex={-1000000}
       >
         {shuffledPosts
           .reverse()
@@ -247,115 +85,44 @@ function App() {
             (post: string) => post.includes("twitter") || post.includes("x.com")
           )
           .map((post) => {
-            return (
-              <Stack>
-                <blockquote
-                  className='twitter-tweet'
-                  style={{ width: "350px" }}
-                >
-                  <a href={post.toLowerCase().replace("x.com", "twitter.com")}>
-                    Loading
-                  </a>
-                </blockquote>
-                <ShareButtons url={post} />
-              </Stack>
-            );
+            return <TwitterBlock url={post} />;
           })}
       </Stack>
       <Stack
         p={1}
         gap={5}
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         style={{
-          opacity: chosenNetwork === "tiktok" ? 1 : 0,
+          display: chosenNetwork === "tiktok" ? "" : "none",
           backgroundColor: "whitesmoke",
         }}
-        height={chosenNetwork === "tiktok" ? "initial" : 0}
-        position={chosenNetwork === "tiktok" ? "initial" : "absolute"}
-        top={chosenNetwork === "tiktok" ? 0 : -1000}
-        zIndex={-1000000}
       >
         {shuffledPosts
           .reverse()
           .filter((post: string) => post.includes("tiktok"))
           .map((post) => {
-            return (
-              <Stack>
-                <blockquote
-                  className='tiktok-embed'
-                  cite={post}
-                  data-video-id={getTiktokVideoId(post)}
-                >
-                  <section>Loading</section>
-                </blockquote>
-
-                <ShareButtons url={post} />
-              </Stack>
-            );
+            return <TiktokBlock url={post} />;
           })}
       </Stack>
       <Stack
         p={1}
         gap={5}
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         style={{
-          opacity: chosenNetwork === "instagram" ? 1 : 0,
+          display: chosenNetwork === "instagram" ? "" : "none",
           backgroundColor: "whitesmoke",
         }}
-        height={chosenNetwork === "instagram" ? "initial" : 0}
-        position={chosenNetwork === "instagram" ? "initial" : "absolute"}
-        top={chosenNetwork === "instagram" ? 0 : -1000}
-        zIndex={-1000000}
       >
         {shuffledPosts
           .reverse()
           .filter((post: string) => post.includes("instagram"))
-          .map((post) => {
-            return (
-              <Stack>
-                <blockquote
-                  className='instagram-media'
-                  data-instgrm-permalink={post}
-                  data-instgrm-version='14'
-                  style={{
-                    background: "#FFF",
-                    border: "0",
-                    borderRadius: "3px",
-                    boxShadow:
-                      "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
-                    margin: "1px",
-                    maxWidth: "540px",
-                    minWidth: "326px",
-                    padding: "0",
-                    width: "99.375%",
-                  }}
-                ></blockquote>{" "}
-                <script async src='//www.instagram.com/embed.js'></script>
-                <ShareButtons url={post} />
-              </Stack>
-            );
-          })}
+          .map((post) => (
+            <InstagramBlock url={post} />
+          ))}
       </Stack>
-      <footer>
-        <Stack
-          pt={2}
-          pb={4}
-          justifyContent='center'
-          alignItems='center'
-          gap={2}
-        >
-          <Typography variant='body2'>
-            Made with love
-            <br />
-            Use this{" "}
-            <a href='https://forms.gle/qmt8tQ6mKy8cWLMS7'>Google Form</a> for
-            adding posts
-          </Typography>
-          <img alt='israel' src={il} style={{ width: 36, height: 36 }} />
-        </Stack>
-      </footer>
+      <PageFooter />
     </div>
   );
 }
