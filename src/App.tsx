@@ -31,11 +31,11 @@ function App() {
       <Stack p={5} pt={2}>
         <Stack mb={1}>
           <span style={{ fontSize: "2em" }}>🇮🇱</span>
-          <Typography variant='h1' fontSize={35} fontWeight={700}>
+          <Typography variant='h1' fontFamily="'Century Gothic', Arial, sans-serif"   fontSize={35} fontWeight={700}>
             Help with Israeli Diplomacy across the Web
           </Typography>
         </Stack>
-        <Typography variant='h2' fontSize={25}>
+        <Typography variant='h2'  fontFamily="'Century Gothic', Arial, sans-serif" fontSize={25}>
           Participate in debates and help spread the truth
         </Typography>
       </Stack>
