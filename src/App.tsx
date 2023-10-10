@@ -43,6 +43,10 @@ function App() {
     tiktok.src = "//www.tiktok.com/embed.js";
     tiktok.async = true;
     document.body.appendChild(tiktok);
+    const ig = document.createElement("script");
+    ig.src = "//www.instagram.com/embed.js";
+    ig.async = true;
+    document.body.appendChild(ig);
   }, []);
 
   const getTiktokVideoId = (url: string) => {
@@ -286,7 +290,49 @@ function App() {
                 </blockquote>
 
                 <ShareButtons url={post} />
-                <script async src='https://www.tiktok.com/embed.js'></script>
+              </Stack>
+            );
+          })}
+      </Stack>
+      <Stack
+        p={1}
+        gap={5}
+        justifyContent='center'
+        alignItems='center'
+        style={{
+          opacity: chosenNetwork === "instagram" ? 1 : 0,
+          backgroundColor: "whitesmoke",
+        }}
+        height={chosenNetwork === "instagram" ? "initial" : 0}
+        position={chosenNetwork === "instagram" ? "initial" : "absolute"}
+        top={chosenNetwork === "instagram" ? 0 : -1000}
+        zIndex={-1000000}
+      >
+        {shuffledPosts
+          .reverse()
+          .filter((post: string) => post.includes("instagram"))
+          .map((post) => {
+            return (
+              <Stack>
+                <blockquote
+                  className='instagram-media'
+                  data-instgrm-permalink={post}
+                  data-instgrm-version='14'
+                  style={{
+                    background: "#FFF",
+                    border: "0",
+                    borderRadius: "3px",
+                    boxShadow:
+                      "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
+                    margin: "1px",
+                    maxWidth: "540px",
+                    minWidth: "326px",
+                    padding: "0",
+                    width: "99.375%",
+                  }}
+                ></blockquote>{" "}
+                <script async src='//www.instagram.com/embed.js'></script>
+                <ShareButtons url={post} />
               </Stack>
             );
           })}
