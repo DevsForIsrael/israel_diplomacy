@@ -71,11 +71,11 @@ function App() {
           <CloseIcon />
         </Stack>
         <Stack p={4} alignItems='center' gap={2} pb={6}>
-          <Typography variant='h5'>
+          <Typography variant='h5' fontFamily="'Century Gothic', Arial, sans-serif">
             Tips for explaining Israels situation in the world
           </Typography>
           <Stack>
-            <Typography variant='subtitle1'>Use these facts:</Typography>
+            <Typography variant='subtitle1'  fontFamily="'Century Gothic', Arial, sans-serif">Use these facts:</Typography>
             <ul style={{ padding: "1em" }}>
               <li style={{ marginBottom: "1.5em" }}>
                 The death toll from a major Hamas attack had risen above 700,
@@ -153,7 +153,7 @@ function App() {
         justifyContent='center'
         onClick={() => setIsDrawerOpen(true)}
       >
-        <Typography variant='body1'>
+        <Typography variant='body1'  fontFamily="'Century Gothic', Arial, sans-serif">
           Tips for explaining Israels situation in the world
         </Typography>
         <ArrowDropDownIcon />
@@ -161,16 +161,16 @@ function App() {
       <Stack p={5} pt={3} justifyContent='center' alignItems='center'>
         <Stack mb={1} justifyContent='center' alignItems='center' gap={1}>
           <img alt='israel' src={il} style={{ width: 36, height: 36 }} />
-          <Typography variant='h1' fontSize={35} fontWeight={700}>
+          <Typography variant='h1' fontFamily="'Century Gothic', Arial, sans-serif"  fontSize={34} fontWeight={600}>
             Help with Israeli Diplomacy across the Web
           </Typography>
         </Stack>
-        <Typography variant='h2' fontSize={25}>
+        <Typography variant='h2' fontFamily="'Century Gothic', Arial, sans-serif" fontSize={25}>
           Participate in debates and help spread the truth
         </Typography>
       </Stack>
       <Stack justifyContent='center' alignItems='center' width='100%' mb={3}>
-        <Typography variant='subtitle1' fontSize={16} pb={0.5}>
+        <Typography variant='subtitle1' fontFamily="'Century Gothic', Arial, sans-serif"  fontSize={16} pb={0.5}>
           Preferred Network
         </Typography>
         <ButtonGroup variant='outlined' aria-label='outlined button group'>
@@ -232,6 +232,7 @@ function App() {
         justifyContent='center'
         alignItems='center'
         style={{
+          display:"grid",
           opacity: chosenNetwork === "twitter" ? 1 : 0,
           backgroundColor: "whitesmoke",
         }}
