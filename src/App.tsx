@@ -121,14 +121,6 @@ function App() {
                 governments.
               </li>
             </ul>
-            <p>
-              This article describes a tragic and chaotic situation resulting
-              from a major conflict between Israel and Hamas, with a significant
-              loss of life and many people still unaccounted for. Please note
-              that the situation described in the article is based on the
-              information available at the time of the report, and developments
-              may have occurred since then.
-            </p>
             <Stack
               mt={4}
               onClick={() => setIsDrawerOpen(false)}
