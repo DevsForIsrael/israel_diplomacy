@@ -1,0 +1,33 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#2a0083",
+    "titleBar.activeBackground": "#0202a0",
+    "titleBar.activeForeground": "#ffffff"
+  },
+
+  // requires "todo highlight" extension
+  "todohighlight.keywords": [
+    {
+      "text": "TODO:",
+      "color": "white",
+      "backgroundColor": "#ff0000"
+    },
+    {
+      "text": "FIXME:",
+      "color": "white",
+      "backgroundColor": "#0000ff"
+    },
+    {
+      "text": "IDEA:",
+      "color": "white",
+      "backgroundColor": "#DB26F1"
+    }
+  ],
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "javascript.format.semicolons": "remove"
+}
