@@ -1,7 +1,7 @@
 {
   "name": "israel_diplomacy",
   "version": "0.1.0",
-  "homepage": "https://nirtz89.github.io/israel_diplomacy",
+  "homepage": "http://www.explainisrael.com",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
