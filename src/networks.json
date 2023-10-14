@@ -1,0 +1,26 @@
+[
+  {
+    "name": "reddit",
+    "src": "//embed.redditmedia.com/widgets/platform.js",
+    "padding": 2,
+    "display": ""
+  },
+  {
+    "name": "twitter",
+    "src": "//platform.twitter.com/widgets.js",
+    "padding": 1,
+    "display": "grid"
+  },
+  {
+    "name": "tiktok",
+    "src": "//www.tiktok.com/embed.js",
+    "padding": 1,
+    "display": ""
+  },
+  {
+    "name": "instagram",
+    "src": "//www.instagram.com/embed.js",
+    "padding": 1,
+    "display": ""
+  }
+]

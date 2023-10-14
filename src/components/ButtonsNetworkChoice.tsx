@@ -8,11 +8,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TikTokIcon from "../icons/TiktokIcon";
 import { Button } from "@mui/material";
+import { networkName } from "../types";
 
 type Props = {
-  setChosenNetwork: Dispatch<
-    SetStateAction<"reddit" | "twitter" | "facebook" | "tiktok" | "instagram">
-  >;
+  setChosenNetwork: Dispatch<SetStateAction<networkName>>;
 };
 
 const ButtonsNetworkChoice = ({ setChosenNetwork }: Props) => {
