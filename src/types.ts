@@ -1,8 +1,8 @@
 const networkNames = ["reddit", "twitter", "tiktok", "instagram"] as const;
-export type networkName = (typeof networkNames)[number];
+export type NetworkName = (typeof networkNames)[number];
 
 export interface Network {
-  name: networkName;
+  name: NetworkName;
   src: string;
   padding: number;
   display: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack } from "@mui/material";
-import ShareButtons from '../ShareButtons';
+import ShareButtons from "../ShareButtons";
 
 type Props = {
   url: string;
@@ -8,7 +8,7 @@ type Props = {
 
 const RedditBlock = ({ url }: Props) => {
   return (
-    <Stack sx={{width: "50vw", maxWidth: "600px"}}>
+    <Stack sx={{ width: "50vw", maxWidth: "600px" }}>
       <blockquote
         className="reddit-embed-bq"
         style={{ height: 500 }}
