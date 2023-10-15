@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Stack } from "@mui/material";
 import _networks from "../networks.json";
 import TiktokBlock from "../components/TiktokBlock";
@@ -37,20 +37,36 @@ type Props = {
 
 function Main({ chosenNetwork }: Props) {
   const [networkPosts, setNetworkPosts] = React.useState<string[]>([]);
+  let rendered = useRef(false);
+  let loadedScripts = useRef(0);
 
   useEffect(() => {
     const fetchContent = async () => {
-      for (let network of networks) {
-        const scriptElement: HTMLScriptElement =
-          document.createElement("script");
-        scriptElement.src = network.src;
-        scriptElement.async = true;
-        document.body.appendChild(scriptElement);
-      }
-
       const posts = await getContent();
       setNetworkPosts(posts);
+
+      if (!rendered.current) {
+        for (let network of networks) {
+          const scriptElement: HTMLScriptElement =
+            document.createElement("script");
+          // scriptElement.onload = waitScriptLoad;
+          scriptElement.src = network.src;
+          scriptElement.async = true;
+          document.head.appendChild(scriptElement);
+        }
+
+        rendered.current = true;
+      }
     };
+
+    // const waitScriptLoad = () => {
+    //   loadedScripts.current++;
+    //   if (loadedScripts.current === networks.length) {
+    //     console.log("All scripts loaded");
+    //     fetchContent();
+    //   }
+    // };
+
     fetchContent();
   }, []);
 
