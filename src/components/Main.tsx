@@ -38,7 +38,6 @@ type Props = {
 function Main({ chosenNetwork }: Props) {
   const [networkPosts, setNetworkPosts] = React.useState<string[]>([]);
   let rendered = useRef(false);
-  let loadedScripts = useRef(0);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -49,7 +48,6 @@ function Main({ chosenNetwork }: Props) {
         for (let network of networks) {
           const scriptElement: HTMLScriptElement =
             document.createElement("script");
-          // scriptElement.onload = waitScriptLoad;
           scriptElement.src = network.src;
           scriptElement.async = true;
           document.head.appendChild(scriptElement);
@@ -58,14 +56,6 @@ function Main({ chosenNetwork }: Props) {
         rendered.current = true;
       }
     };
-
-    // const waitScriptLoad = () => {
-    //   loadedScripts.current++;
-    //   if (loadedScripts.current === networks.length) {
-    //     console.log("All scripts loaded");
-    //     fetchContent();
-    //   }
-    // };
 
     fetchContent();
   }, []);
