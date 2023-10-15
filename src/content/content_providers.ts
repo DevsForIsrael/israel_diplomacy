@@ -1,7 +1,6 @@
-import "dotenv/config";
-
 import { ContentType } from "./Content";
 import { JSONCreator } from "./JSONContent";
+import { ContentfulCreator } from "./ContentulContent";
 
 export enum CONTENT_PROVIDER {
   JSON = "json",
@@ -9,14 +8,13 @@ export enum CONTENT_PROVIDER {
 }
 
 export const getContent = (): Promise<string[]> => {
-  console.log("********* " + process.env.DEFAULT_CONTENT_PROVIDER);
   let contentProvider: ContentType;
-  switch (process.env.DEFAULT_CONTENT_PROVIDER) {
+  switch (process.env.REACT_APP_DEFAULT_CONTENT_PROVIDER) {
     case CONTENT_PROVIDER.JSON:
       contentProvider = new JSONCreator().getContentProvider();
       break;
     case CONTENT_PROVIDER.CONTENTFUL:
-      contentProvider = new JSONCreator().getContentProvider();
+      contentProvider = new ContentfulCreator().getContentProvider();
       break;
     default:
       contentProvider = new JSONCreator().getContentProvider();
