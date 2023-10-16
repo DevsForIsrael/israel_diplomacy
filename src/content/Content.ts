@@ -1,19 +1,30 @@
+import { networkNames, Content } from "../types";
+
+export const defaultContent: Content = networkNames.reduce(
+  (acc, networkName) => ({ ...acc, [networkName]: [] }),
+  {} as Content
+);
+
 export abstract class ContentCreator {
   public abstract getContentProvider(): ContentType;
 
-  private posts: string[] = [];
+  private posts: Content = networkNames.reduce(
+    (acc, networkName) => ({ ...acc, [networkName]: [] }),
+    {} as Content
+  );
 
-  public async getContent(): Promise<string[]> {
-    if (this.posts.length === 0) {
+  private fetched: boolean = false;
+
+  public async getContent(): Promise<Content> {
+    if (!this.fetched) {
       const provider: ContentType = this.getContentProvider();
-      const content = await provider.contentImplementation();
-      const shuffledPosts: string[] = content.sort(() => 0.5 - Math.random());
-      this.posts = shuffledPosts.reverse();
+      this.posts = await provider.contentImplementation();
+      this.fetched = true;
     }
     return this.posts;
   }
 }
 
 export interface ContentType {
-  contentImplementation(): Promise<string[]>;
+  contentImplementation(): Promise<Content>;
 }

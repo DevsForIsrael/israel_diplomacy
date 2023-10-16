@@ -6,10 +6,8 @@ import TiktokBlock from "../components/TiktokBlock";
 import RedditBlock from "../components/RedditBlock";
 import TwitterBlock from "../components/TwitterBlock";
 import InstagramBlock from "../components/InstagramBlock";
-import PageFooter from "../components/PageFooter";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { Network, NetworkName } from "../types";
-
+import { Network, NetworkName, Content } from "../types";
 import { getContent } from "../content/content_providers";
 
 export const defaultNetworkName: NetworkName = "reddit";
@@ -36,28 +34,29 @@ type Props = {
 };
 
 function Main({ chosenNetwork }: Props) {
-  const [networkPosts, setNetworkPosts] = React.useState<string[]>([]);
+  const [networkPosts, setNetworkPosts] = React.useState<Content>(
+    {} as Content
+  );
   let rendered = useRef(false);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const posts = await getContent();
+      const posts: Content = await getContent();
       setNetworkPosts(posts);
 
-      if (!rendered.current) {
-        for (let network of networks) {
-          const scriptElement: HTMLScriptElement =
-            document.createElement("script");
-          scriptElement.src = network.src;
-          scriptElement.async = true;
-          document.head.appendChild(scriptElement);
-        }
-
-        rendered.current = true;
+      for (let network of networks) {
+        const scriptElement: HTMLScriptElement =
+          document.createElement("script");
+        scriptElement.src = network.src;
+        scriptElement.async = true;
+        document.head.appendChild(scriptElement);
       }
     };
 
-    fetchContent();
+    if (!rendered.current) {
+      rendered.current = true;
+      fetchContent();
+    }
   }, []);
 
   return (
@@ -76,13 +75,12 @@ function Main({ chosenNetwork }: Props) {
               backgroundColor: "whitesmoke",
             }}
           >
-            {networkPosts
-              .filter((post: string) => post.includes(network.name))
-              .map((post: string) => block(network.name, post))}
+            {networkPosts[network.name]?.map((post: string) =>
+              block(network.name, post)
+            )}
           </Stack>
         );
       })}
-      <PageFooter />
     </React.Fragment>
   );
 }

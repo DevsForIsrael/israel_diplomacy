@@ -1,4 +1,9 @@
-const networkNames = ["reddit", "twitter", "tiktok", "instagram"] as const;
+export const networkNames = [
+  "reddit",
+  "twitter",
+  "tiktok",
+  "instagram",
+] as const;
 export type NetworkName = (typeof networkNames)[number];
 
 export interface Network {
@@ -9,3 +14,5 @@ export interface Network {
 }
 
 export interface EnumNetworks extends Array<Network> {}
+
+export type Content = Record<NetworkName, string[]>;
