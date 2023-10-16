@@ -1,6 +1,6 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import { Stack } from '@mui/material';
+import { Stack } from "@mui/material";
 import ShareButtons from "../ShareButtons";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const TiktokBlock = ({ url }: Props) => {
-  const { ref, inView, entry } = useInView({
+  const { ref } = useInView({
     threshold: 0.4,
   });
 

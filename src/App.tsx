@@ -4,12 +4,12 @@ import OverviewDrawer from "./components/OverviewDrawer";
 import SiteHeader from "./components/SiteHeader";
 import ButtonsNetworkChoice from "./components/ButtonsNetworkChoice";
 import PageFooter from "./components/PageFooter";
-import { networkName } from "./types";
+import { NetworkName } from "./types";
 import Main, { defaultNetworkName } from "./components/Main";
 
 function App() {
   const [chosenNetwork, setChosenNetwork] =
-    useState<networkName>(defaultNetworkName);
+    useState<NetworkName>(defaultNetworkName);
 
   return (
     <div className="App">
