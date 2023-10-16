@@ -1,13 +1,14 @@
 import { ContentType } from "./Content";
 import { JSONCreator } from "./JSONContent";
 import { ContentfulCreator } from "./ContentulContent";
+import { NetworkName, Content } from "../types";
 
 export enum CONTENT_PROVIDER {
   JSON = "json",
   CONTENTFUL = "contentful",
 }
 
-export const getContent = (): Promise<string[]> => {
+export const getContent = async (): Promise<Content> => {
   let contentProvider: ContentType;
   switch (process.env.REACT_APP_DEFAULT_CONTENT_PROVIDER) {
     case CONTENT_PROVIDER.JSON:
@@ -19,6 +20,6 @@ export const getContent = (): Promise<string[]> => {
     default:
       contentProvider = new JSONCreator().getContentProvider();
   }
-  const content = contentProvider.contentImplementation();
+  const content = await contentProvider.contentImplementation();
   return content;
 };

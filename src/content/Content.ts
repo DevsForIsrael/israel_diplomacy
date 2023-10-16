@@ -1,18 +1,21 @@
-import { networkNames, NetworkName } from "../types";
+import { networkNames, Content } from "../types";
+
+export const defaultContent: Content = networkNames.reduce(
+  (acc, networkName) => ({ ...acc, [networkName]: [] }),
+  {} as Content
+);
 
 export abstract class ContentCreator {
   public abstract getContentProvider(): ContentType;
 
-  private posts: Record<NetworkName, string[]> = {
-    reddit: [],
-    twitter: [],
-    tiktok: [],
-    instagram: [],
-  };
-  // TODO: Fix this type into a prefilled object with the networkNames as keys
+  private posts: Content = networkNames.reduce(
+    (acc, networkName) => ({ ...acc, [networkName]: [] }),
+    {} as Content
+  );
+
   private fetched: boolean = false;
 
-  public async getContent(): Promise<Record<NetworkName, string[]>> {
+  public async getContent(): Promise<Content> {
     if (!this.fetched) {
       const provider: ContentType = this.getContentProvider();
       this.posts = await provider.contentImplementation();
@@ -23,5 +26,5 @@ export abstract class ContentCreator {
 }
 
 export interface ContentType {
-  contentImplementation(): Promise<Record<NetworkName, string[]>>;
+  contentImplementation(): Promise<Content>;
 }

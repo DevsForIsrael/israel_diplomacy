@@ -14,3 +14,5 @@ export interface Network {
 }
 
 export interface EnumNetworks extends Array<Network> {}
+
+export type Content = Record<NetworkName, string[]>;
