@@ -8,9 +8,7 @@ import TwitterBlock from "../components/TwitterBlock";
 import InstagramBlock from "../components/InstagramBlock";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { Network, NetworkName, Content } from "../types";
-
 import { getContent } from "../content/content_providers";
-import { defaultContent } from "../content/Content";
 
 export const defaultNetworkName: NetworkName = "reddit";
 
