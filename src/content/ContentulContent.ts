@@ -13,7 +13,7 @@ export class ContentfulCreator extends ContentCreator {
 }
 
 class ContentfulContent implements ContentType {
-  public async contentImplementation(): Promise<string[]> {
+  public async contentImplementation(): Promise<Record<NetworkName, string[]>> {
     const response = await fetch(
       `${API_URL}/spaces/${SPACE_ID}/environments/${EPI_ENV}/entries/${ENTRY_ID}?access_token=${API_TOKEN}`
     );
@@ -21,6 +21,7 @@ class ContentfulContent implements ContentType {
     const entries = Object.keys(data.fields)
       .reduce((acc, field) => acc.concat(data.fields[field]), [] as string[])
       .filter((entry) => entry.indexOf("http") > -1);
+    // TODO: fix this and shuffle the entries
     return entries;
   }
 }

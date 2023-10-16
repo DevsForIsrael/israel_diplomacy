@@ -44,20 +44,19 @@ function Main({ chosenNetwork }: Props) {
       const posts = await getContent();
       setNetworkPosts(posts);
 
-      if (!rendered.current) {
-        for (let network of networks) {
-          const scriptElement: HTMLScriptElement =
-            document.createElement("script");
-          scriptElement.src = network.src;
-          scriptElement.async = true;
-          document.head.appendChild(scriptElement);
-        }
-
-        rendered.current = true;
+      for (let network of networks) {
+        const scriptElement: HTMLScriptElement =
+          document.createElement("script");
+        scriptElement.src = network.src;
+        scriptElement.async = true;
+        document.head.appendChild(scriptElement);
       }
     };
 
-    fetchContent();
+    if (!rendered.current) {
+      rendered.current = true;
+      fetchContent();
+    }
   }, []);
 
   return (

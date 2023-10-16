@@ -1,19 +1,27 @@
+import { networkNames, NetworkName } from "../types";
+
 export abstract class ContentCreator {
   public abstract getContentProvider(): ContentType;
 
-  private posts: string[] = [];
+  private posts: Record<NetworkName, string[]> = {
+    reddit: [],
+    twitter: [],
+    tiktok: [],
+    instagram: [],
+  };
+  // TODO: Fix this type into a prefilled object with the networkNames as keys
+  private fetched: boolean = false;
 
-  public async getContent(): Promise<string[]> {
-    if (this.posts.length === 0) {
+  public async getContent(): Promise<Record<NetworkName, string[]>> {
+    if (!this.fetched) {
       const provider: ContentType = this.getContentProvider();
-      const content = await provider.contentImplementation();
-      const shuffledPosts: string[] = content.sort(() => 0.5 - Math.random());
-      this.posts = shuffledPosts.reverse();
+      this.posts = await provider.contentImplementation();
+      this.fetched = true;
     }
     return this.posts;
   }
 }
 
 export interface ContentType {
-  contentImplementation(): Promise<string[]>;
+  contentImplementation(): Promise<Record<NetworkName, string[]>>;
 }
