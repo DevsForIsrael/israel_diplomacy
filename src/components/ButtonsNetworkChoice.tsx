@@ -8,13 +8,14 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TikTokIcon from "../icons/TiktokIcon";
 import { Button } from "@mui/material";
-import { NetworkName } from "../types";
+import { NetworkName, NetworkNameEnum } from "../types";
 
 type Props = {
   setChosenNetwork: Dispatch<SetStateAction<NetworkName>>;
+  buttonsTitle: string;
 };
 
-const ButtonsNetworkChoice = ({ setChosenNetwork }: Props) => {
+const ButtonsNetworkChoice = ({ setChosenNetwork, buttonsTitle }: Props) => {
   return (
     <Stack justifyContent="center" alignItems="center" width="100%" mb={3}>
       <Typography
@@ -23,25 +24,25 @@ const ButtonsNetworkChoice = ({ setChosenNetwork }: Props) => {
         fontSize={16}
         pb={0.5}
       >
-        Preferred Network
+        {buttonsTitle}
       </Typography>
       <ButtonGroup variant="outlined" aria-label="outlined button group">
-        <Button onClick={() => setChosenNetwork("reddit")}>
+        <Button onClick={() => setChosenNetwork(NetworkNameEnum.REDDIT)}>
           <Stack justifyContent="center" alignItems="center">
             <RedditIcon />
           </Stack>
         </Button>
-        <Button onClick={() => setChosenNetwork("twitter")}>
+        <Button onClick={() => setChosenNetwork(NetworkNameEnum.TWITTER)}>
           <Stack justifyContent="center" alignItems="center">
             <TwitterIcon />
           </Stack>
         </Button>
-        <Button onClick={() => setChosenNetwork("instagram")}>
+        <Button onClick={() => setChosenNetwork(NetworkNameEnum.INSTAGRAM)}>
           <Stack justifyContent="center" alignItems="center">
             <InstagramIcon />
           </Stack>
         </Button>
-        <Button onClick={() => setChosenNetwork("tiktok")}>
+        <Button onClick={() => setChosenNetwork(NetworkNameEnum.TIKTOK)}>
           <Stack justifyContent="center" alignItems="center">
             <TikTokIcon />
           </Stack>

@@ -7,25 +7,34 @@ import RedditBlock from "../components/RedditBlock";
 import TwitterBlock from "../components/TwitterBlock";
 import InstagramBlock from "../components/InstagramBlock";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { Network, NetworkName, Content } from "../types";
+import {
+  Network,
+  NetworkName,
+  NetworkNameEnum,
+  Content,
+  Posts,
+  ContentEntryTypeEnum,
+} from "../types";
 import { getContent } from "../content/content_providers";
 
-export const defaultNetworkName: NetworkName = "reddit";
+export const defaultNetworkName: NetworkName = NetworkNameEnum.REDDIT;
 
-interface EnumNetworks extends Array<Network> {}
+interface NetworksEnum extends Array<Network> {}
 
-const networks = _networks as EnumNetworks;
+const networks = _networks as NetworksEnum;
 
 const block = (network: NetworkName, urlPosts: string): ReactJSXElement => {
   switch (network) {
-    case "reddit":
+    case NetworkNameEnum.REDDIT:
       return <RedditBlock url={urlPosts} key={urlPosts} />;
-    case "twitter":
+    case NetworkNameEnum.TWITTER:
       return <TwitterBlock url={urlPosts} key={urlPosts} />;
-    case "tiktok":
+    case NetworkNameEnum.TIKTOK:
       return <TiktokBlock url={urlPosts} key={urlPosts} />;
-    case "instagram":
+    case NetworkNameEnum.INSTAGRAM:
       return <InstagramBlock url={urlPosts} key={urlPosts} />;
+    default:
+      return <></>;
   }
 };
 
@@ -34,15 +43,16 @@ type Props = {
 };
 
 function Main({ chosenNetwork }: Props) {
-  const [networkPosts, setNetworkPosts] = React.useState<Content>(
-    {} as Content
-  );
+  const [networkPosts, setNetworkPosts] = React.useState<Posts>({} as Posts);
   let rendered = useRef(false);
 
   useEffect(() => {
     const fetchContent = async () => {
-      const posts: Content = await getContent();
-      setNetworkPosts(posts);
+      rendered.current = true;
+      const posts: Content = (await getContent(
+        ContentEntryTypeEnum.POSTS
+      )) as Posts;
+      setNetworkPosts(posts as Posts);
 
       for (let network of networks) {
         const scriptElement: HTMLScriptElement =
@@ -53,10 +63,7 @@ function Main({ chosenNetwork }: Props) {
       }
     };
 
-    if (!rendered.current) {
-      rendered.current = true;
-      fetchContent();
-    }
+    !rendered.current && fetchContent();
   }, []);
 
   return (
